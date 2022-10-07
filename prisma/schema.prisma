@@ -14,7 +14,7 @@ model user {
   id       String       @id @default(auto()) @map("_id") @db.ObjectId
   email    String       @unique
   password String
-  name     String
+  name     String?
   services servicelog[]
   createAt DateTime     @default(now())
   updateAt DateTime     @updatedAt
@@ -30,25 +30,25 @@ model servicelog {
 }
 
 model techNeeds {
-  id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  buyKindNm         String[] // 희망 구매 유형
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  buyKindNm         String? // 희망 구매 유형
   dmdtchNm          String? // 수요 기술명
-  keyword           String[] // 키워드
-  tchlgyIndcprDtl   String[] // 기술 도입 목적
-  tchlgyPccndCn     String[] // 기술구매조건
-  tcntrnFxamtTchfee String[] // 기술이전 정액기술료
-  tcntrnOrdnrTchfee String[] // 기술이전 경상기술료
-  tpDmandCdNm       String[] // 권역명
+  keyword           String? // 키워드
+  tchlgyIndcprDtl   String? // 기술 도입 목적
+  tchlgyPccndCn     String? // 기술구매조건
+  tcntrnFxamtTchfee String? // 기술이전 정액기술료
+  tcntrnOrdnrTchfee String? // 기술이전 경상기술료
+  tpDmandCdNm       String? // 권역명
 }
 
 model techMarketInfo {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  devStatusName String[] // 개발 진행 상태
-  indcateNamem  String[] // 산업기술중분류명
-  indcateNames  String[] // 산업기술소분류명 
-  kwrdDtl       String[] // 키워드
-  slePc         String[] // 판매가격
-  sltchNm       String[] // 판매기술명
-  tcateNamem    String[] // 과학기술중분류명
-  tcateNames    String[] //과학기술소분류명
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  devStatusName String? // 개발 진행 상태
+  indcateNamem  String? // 산업기술중분류명
+  indcateNames  String? // 산업기술소분류명 
+  kwrdDtl       String? // 키워드
+  slePc         String? // 판매가격
+  sltchNm       String? // 판매기술명
+  tcateNamem    String? // 과학기술중분류명
+  tcateNames    String? //과학기술소분류명
 }
