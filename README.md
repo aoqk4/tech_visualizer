@@ -8,3 +8,8 @@
 
 - 프로젝트 생성
 - `prisma`, `tailwindCSS` 적용
+
+## 2022.10.07
+
+- UI 작업
+- 1개 (techNeed) API에서 데이터베이스 올려놓기 성공
