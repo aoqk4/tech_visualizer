@@ -2,7 +2,7 @@ import { useState } from "react";
 import Layout from "../components/Layout";
 
 export default function MyPage() {
-  const [stat, setStat] = useState(0);
+  const [stat, setStat] = useState(1);
 
   console.log(stat);
 
@@ -21,9 +21,7 @@ export default function MyPage() {
           <button className="text-2xl" onClick={() => setStat(3)}>
             서비스 신청
           </button>
-          <button className="text-2xl" onClick={() => setStat(4)}>
-            로그아웃
-          </button>
+          <button className="text-2xl">로그아웃</button>
         </div>
         <div className="w-[75%] h-[80%] border-2 rounded-2xl flex justify-center items-center">
           {stat === 1 && (
@@ -57,7 +55,43 @@ export default function MyPage() {
               </div>
             </div>
           )}
-          {stat === 3 && <div>123</div>}
+          {stat === 3 && (
+            <div className="flex flex-col w-[90%] h-[90%] items-center space-y-24">
+              <div className="text-4xl font-mono font-bold text-white">
+                서비스 신청
+              </div>
+              <form className="w-full h-[80%] flex flex-col items-center justify-around text-white text-3xl font-bold">
+                <div className="w-full flex justify-center space-x-8 ">
+                  <label>신청 기술</label>
+                  <select className="w-[60%] text-slate-800">
+                    <option value={"1"}>123</option>
+                    <option value={"2"}>123</option>
+                    <option value={"3"}>123</option>
+                    <option value={"4"}>123</option>
+                    <option value={"5"}>123</option>
+                    <option value={"6"}>123</option>
+                  </select>
+                </div>
+                <div className="flex w-[75%] justify-evenly">
+                  <span className="space-x-4">
+                    <label>학술자료</label>
+                    <input type={"checkbox"} className="scale-[170%]"></input>
+                  </span>
+                  <span className="space-x-4">
+                    <label>통계자료</label>
+                    <input type={"checkbox"} className="scale-[170%]"></input>
+                  </span>
+                  <span className="space-x-4">
+                    <label>수요자료</label>
+                    <input type={"checkbox"} className="scale-[170%]"></input>
+                  </span>
+                </div>
+                <button className="bg-neutral-600 p-3 rounded-lg">
+                  서비스 신청
+                </button>
+              </form>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@ export default function Layout(props: LayoutProps) {
           <Link href={`/login`}>Documentation</Link>
         </div>
         <div className="pr-12 text-4xl font-mono">
-          <Link href={`/login`}>My Page</Link>
+          <Link href={`/login`}>MyPage</Link>
         </div>
       </div>
     </nav>
