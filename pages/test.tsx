@@ -82,7 +82,7 @@ export default function Test() {
   Chart.defaults.font = {
     family: "Segoe UI",
   };
-
+  swcMinify: false;
   const configs: ChartOptions = {
     responsive: true,
     plugins: {
