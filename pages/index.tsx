@@ -20,6 +20,11 @@ const Home: NextPage = () => {
     LineElement,
     BarElement
   );
+
+  Chart.defaults.font = {
+    family: "Segoe UI",
+  };
+
   Chart.defaults.color = "#ffffff";
 
   const data: ChartData<"line", number[], string> = {

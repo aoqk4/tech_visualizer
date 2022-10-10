@@ -79,6 +79,10 @@ export default function Test() {
     Title
   );
 
+  Chart.defaults.font = {
+    family: "Segoe UI",
+  };
+
   const configs: ChartOptions = {
     responsive: true,
     plugins: {

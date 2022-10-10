@@ -104,6 +104,10 @@ export default function DashBoard() {
     Title
   );
 
+  Chart.defaults.font = {
+    family: "Segoe UI",
+  };
+
   const configs: ChartOptions = {
     responsive: true,
     plugins: {
