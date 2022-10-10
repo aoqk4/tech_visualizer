@@ -32,20 +32,6 @@ const Home: NextPage = () => {
         borderWidth: 2,
         data: [3, 4, 7, 8, 1],
       },
-      {
-        type: "line",
-        label: "Dataset 2",
-        backgroundColor: "rgb(255, 99, 132)",
-        data: [1, 2, 3, 4, 5, 8],
-        borderColor: "red",
-        borderWidth: 2,
-      },
-      {
-        type: "line",
-        label: "Dataset 3",
-        backgroundColor: "rgb(75, 192, 192)",
-        data: [1, 2, 3, 4, 5],
-      },
     ],
   };
 
