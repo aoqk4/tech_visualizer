@@ -154,7 +154,7 @@ export default function DashBoard() {
   function dataTest2() {
     fetch("api/techneeds", {
       method: "POST",
-      body: "반도체",
+      body: "에너지",
     })
       .then((res) => res.json())
       .then((json) => {
@@ -206,16 +206,15 @@ export default function DashBoard() {
           Dash Board
         </div>
         <div className="h-[80%] w-[90%] flex flex-col">
-          <div className="h-[50%] flex justify-between">
+          <div className="h-[30%] flex justify-between">
             <div className=" w-[50%] rounded-xl border-2">
-              <span className="font-bold text-2xl text-white">학술자료</span>
+              {/* <span className="font-bold text-2xl text-white">학술자료</span> */}
             </div>
             <div className="w-[50%] rounded-xl">
               <Bar data={test} options={configs}></Bar>
             </div>
           </div>
           <div className="h-[50%] rounded-xl ">
-            <span className="font-bold text-2xl text-white">통계자료</span>
             <Bar data={nData} options={configs} />
           </div>
         </div>

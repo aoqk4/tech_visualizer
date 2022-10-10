@@ -38,6 +38,7 @@ type testType = {
 };
 
 export default function Test() {
+  const [search, setSearch] = useState("");
   const [test, setTest] = useState<ChartData<"bar", Number[], String>>({
     labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
@@ -127,7 +128,7 @@ export default function Test() {
   function dataTest2() {
     fetch("api/techneeds", {
       method: "POST",
-      body: "전기차",
+      body: search,
     })
       .then((res) => res.json())
       .then((json) => {
@@ -166,13 +167,24 @@ export default function Test() {
   }
   useEffect(() => {
     // dataTest();
-    dataTest2();
+    // dataTest2();
   }, []);
+
+  console.log(search);
 
   return (
     <div className="">
       <div className="">
         <Bar data={test} options={configs}></Bar>
+      </div>
+
+      <div>
+        <input
+          type={"text"}
+          className="bg-slate-300"
+          onChange={(event) => setSearch(event.target.value)}
+        ></input>
+        <button onClick={dataTest2}>확인</button>
       </div>
     </div>
   );
