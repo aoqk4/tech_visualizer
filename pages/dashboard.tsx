@@ -10,9 +10,18 @@ import {
   PointElement,
   ChartOptions,
   Legend,
+  Tooltip,
+  Title,
 } from "chart.js";
+import Link from "next/link";
+import { Bar, Line } from "react-chartjs-2";
 
-import { Line, Bar } from "react-chartjs-2";
+type needDataType = {
+  tchlgyIndcprDtl: String;
+  dmdtchNm: String;
+  tpDmandCdNm: String;
+  buyKindNm: String;
+};
 
 type testType = {
   TBL_NM?: string;
@@ -57,6 +66,32 @@ export default function DashBoard() {
       },
     ],
   });
+  const [nData, setnData] = useState<ChartData<"bar", Number[], String>>({
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+      {
+        type: "bar",
+        label: "Dataset 1",
+        borderColor: "rgb(54, 162, 235)",
+        borderWidth: 2,
+        data: [3, 4, 7, 8, 1],
+      },
+      {
+        type: "bar",
+        label: "Dataset 2",
+        backgroundColor: "rgb(255, 99, 132)",
+        data: [1, 2, 3, 4, 5, 8],
+        borderColor: "red",
+        borderWidth: 2,
+      },
+      {
+        type: "bar",
+        label: "Dataset 3",
+        backgroundColor: "rgb(75, 192, 192)",
+        data: [1, 2, 3, 4, 5],
+      },
+    ],
+  });
 
   Chart.register(
     CategoryScale,
@@ -64,14 +99,24 @@ export default function DashBoard() {
     PointElement,
     LineElement,
     BarElement,
-    Legend
+    Legend,
+    Tooltip,
+    Title
   );
 
   const configs: ChartOptions = {
+    responsive: true,
     plugins: {
+      title: {
+        position: "top",
+      },
       legend: {
         display: true,
         align: "end",
+      },
+      tooltip: {
+        mode: "index",
+        intersect: true,
       },
     },
   };
@@ -111,14 +156,57 @@ export default function DashBoard() {
         });
       });
   }
+
+  function dataTest2() {
+    fetch("api/techneeds", {
+      method: "POST",
+      body: "반도체",
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        return json.result;
+      })
+      .then((result: needDataType[]) => {
+        return result;
+      })
+      .then((arr: needDataType[]) => {
+        let farr = arr.map((ele) => ele.tchlgyIndcprDtl);
+
+        const set = new Set(farr);
+
+        const label = Array.from(set);
+
+        let cnt: Number[] = [];
+
+        for (let i = 0; i < label.length; i++) {
+          cnt.push(farr.filter((ele) => ele === label[i]).length);
+        }
+
+        setnData({
+          labels: label,
+          datasets: [
+            {
+              type: "bar",
+              label: "개",
+              hoverBorderColor: "purple",
+              borderColor: "rgb(54, 162, 235)",
+              borderWidth: 2,
+              data: [...cnt],
+            },
+          ],
+        });
+      });
+  }
+
   useEffect(() => {
     dataTest();
+    dataTest2();
   }, []);
 
   return (
     <div>
       <Layout></Layout>
-      <div className="bg-slate-700 w-full h-[100vh] flex flex-col justify-start items-center space-y-10">
+      <div className="bg-slate-700 w-full h-[200vh] flex flex-col justify-start items-center space-y-10">
         <div></div>
         <div className="w-[90%] font-mono text-4xl text-white font-bold">
           Dash Board
@@ -134,6 +222,7 @@ export default function DashBoard() {
           </div>
           <div className="h-[50%] rounded-xl ">
             <span className="font-bold text-2xl text-white">통계자료</span>
+            <Bar data={nData} options={configs} />
           </div>
         </div>
       </div>

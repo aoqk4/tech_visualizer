@@ -30,10 +30,10 @@ model servicelog {
 }
 
 model techNeeds {
-  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
   buyKindNm         String? // 희망 구매 유형
   dmdtchNm          String? // 수요 기술명
-  keyword           String? // 키워드
+  keyword           String[] // 키워드
   tchlgyIndcprDtl   String? // 기술 도입 목적
   tchlgyPccndCn     String? // 기술구매조건
   tcntrnFxamtTchfee String? // 기술이전 정액기술료

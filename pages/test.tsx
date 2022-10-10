@@ -9,9 +9,20 @@ import {
   PointElement,
   ChartOptions,
   Legend,
+  Interaction,
+  BarHoverOptions,
+  Tooltip,
+  Title,
 } from "chart.js";
 import Link from "next/link";
 import { Bar, Line } from "react-chartjs-2";
+
+type needDataType = {
+  tchlgyIndcprDtl: String;
+  dmdtchNm: String;
+  tpDmandCdNm: String;
+  buyKindNm: String;
+};
 
 type testType = {
   TBL_NM?: string;
@@ -63,14 +74,24 @@ export default function Test() {
     PointElement,
     LineElement,
     BarElement,
-    Legend
+    Legend,
+    Tooltip,
+    Title
   );
 
   const configs: ChartOptions = {
+    responsive: true,
     plugins: {
+      title: {
+        position: "top",
+      },
       legend: {
         display: true,
         align: "end",
+      },
+      tooltip: {
+        mode: "index",
+        intersect: true,
       },
     },
   };
@@ -110,8 +131,50 @@ export default function Test() {
         });
       });
   }
+
+  function dataTest2() {
+    fetch("api/techneeds", {
+      method: "POST",
+      body: "전기차",
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        return json.result;
+      })
+      .then((result: needDataType[]) => {
+        return result;
+      })
+      .then((arr: needDataType[]) => {
+        let farr = arr.map((ele) => ele.tchlgyIndcprDtl);
+
+        const set = new Set(farr);
+
+        const label = Array.from(set);
+
+        let cnt: Number[] = [];
+
+        for (let i = 0; i < label.length; i++) {
+          cnt.push(farr.filter((ele) => ele === label[i]).length);
+        }
+
+        setTest({
+          labels: label,
+          datasets: [
+            {
+              type: "bar",
+              label: "개",
+              hoverBorderColor: "purple",
+              borderColor: "rgb(54, 162, 235)",
+              borderWidth: 2,
+              data: [...cnt],
+            },
+          ],
+        });
+      });
+  }
   useEffect(() => {
-    dataTest();
+    // dataTest();
+    dataTest2();
   }, []);
 
   return (
