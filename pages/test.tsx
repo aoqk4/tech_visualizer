@@ -9,10 +9,7 @@ import {
   PointElement,
   ChartOptions,
   Legend,
-  Interaction,
-  BarHoverOptions,
   Tooltip,
-  Title,
 } from "chart.js";
 import Link from "next/link";
 import { Bar, Line } from "react-chartjs-2";
@@ -75,20 +72,11 @@ export default function Test() {
     LineElement,
     BarElement,
     Legend,
-    Tooltip,
-    Title
+    Tooltip
   );
-
-  Chart.defaults.font = {
-    family: "Segoe UI",
-  };
-  swcMinify: false;
   const configs: ChartOptions = {
     responsive: true,
     plugins: {
-      title: {
-        position: "top",
-      },
       legend: {
         display: true,
         align: "end",

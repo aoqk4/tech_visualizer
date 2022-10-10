@@ -11,7 +11,6 @@ import {
   ChartOptions,
   Legend,
   Tooltip,
-  Title,
 } from "chart.js";
 import Link from "next/link";
 import { Bar, Line } from "react-chartjs-2";
@@ -100,20 +99,11 @@ export default function DashBoard() {
     LineElement,
     BarElement,
     Legend,
-    Tooltip,
-    Title
+    Tooltip
   );
-
-  Chart.defaults.font = {
-    family: "Segoe UI",
-  };
-
   const configs: ChartOptions = {
     responsive: true,
     plugins: {
-      title: {
-        position: "top",
-      },
       legend: {
         display: true,
         align: "end",
