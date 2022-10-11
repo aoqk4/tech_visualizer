@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Layout from "../components/Layout";
 
-const signup = () => {
+const Signup = () => {
   const [email, setEmail] = useState(" ");
   const [psd, setPsd] = useState(" ");
   const [nname, setnname] = useState(" ");
@@ -99,4 +99,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default Signup;
