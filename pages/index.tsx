@@ -12,7 +12,11 @@ import Link from "next/link";
 import { Line } from "react-chartjs-2";
 import Layout from "../components/Layout";
 
+// import { useSession } from "next-auth/react";
+
 const Home: NextPage = () => {
+  // const { data: session } = useSession();
+
   Chart.register(
     CategoryScale,
     LinearScale,
@@ -20,6 +24,7 @@ const Home: NextPage = () => {
     LineElement,
     BarElement
   );
+
   Chart.defaults.color = "#ffffff";
 
   const data: ChartData<"line", number[], string> = {
@@ -30,7 +35,7 @@ const Home: NextPage = () => {
         label: "Dataset 1",
         borderColor: "rgb(54, 162, 235)",
         borderWidth: 2,
-        data: [3, 4, 7, 8, 1],
+        data: [300, 400, 700, 800, 1000],
       },
     ],
   };

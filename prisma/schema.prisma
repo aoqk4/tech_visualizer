@@ -42,11 +42,11 @@ model techNeeds {
 }
 
 model techMarketInfo {
-  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
   devStatusName String? // 개발 진행 상태
   indcateNamem  String? // 산업기술중분류명
   indcateNames  String? // 산업기술소분류명 
-  kwrdDtl       String? // 키워드
+  kwrdDtl       String[] // 키워드
   slePc         String? // 판매가격
   sltchNm       String? // 판매기술명
   tcateNamem    String? // 과학기술중분류명

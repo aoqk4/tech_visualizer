@@ -8,6 +8,7 @@ const prisma = new PrismaClient();
 type Data = {
   name?: String;
   err?: String | undefined;
+  result?: any;
 };
 
 export default async function handler(
@@ -17,7 +18,7 @@ export default async function handler(
   if (req.method === "GET") {
     try {
       fetch(
-        `http://211.188.64.69/OpenAPI/service/tech/techallplus?ServiceKey=${process.env.ServiceKey}&numOfRows=14000`
+        `http://apis.data.go.kr/B552540/KCIOpenApi/artiInfo/openApiM310KorKwdList?serviceKey=${process.env.ServiceKey}&recordCnt=58000&pageNo=1`
       )
         .then((res) => res.text())
         .then((txt) => convert.xml2json(txt, { compact: true, spaces: 4 }))
@@ -26,17 +27,13 @@ export default async function handler(
 
           let obj: object[] = [];
 
-          // console.log(result.response.body.items.item[0]);
-
           result.response.body.items.item.map((ele: any, idx: any) => {
             let testobj = {
-              devStatusName: ele?.devStatusName?._text || " ",
-              kwrdDtl: ele?.kwrdDtl?._text?.split(",") || " ",
-              slePc: ele?.slePc?._text || " ",
+              KOR_KWD: ele.KOR_KWD._text,
             };
             obj.push(testobj);
           });
-          const techMarketInfo = await prisma.techMarketInfo.createMany({
+          const kciData = await prisma.kciData.createMany({
             data: obj,
           });
         });
@@ -44,7 +41,28 @@ export default async function handler(
       res.status(504).json({ err: `${err}` });
     } finally {
       prisma.$disconnect();
-      res.status(200).json({ name: "John Doe" });
+      res.status(200).json({ name: "YES" });
+    }
+  } else if (req.method === "POST") {
+    try {
+      const tsearchData = await prisma.kciData.findMany({
+        where: {
+          KOR_KWD: {
+            startsWith: "반도체",
+          },
+        },
+        select: {
+          KOR_KWD: true,
+        },
+      });
+
+      console.log(tsearchData);
+
+      res.status(200).json({ result: tsearchData });
+    } catch (err) {
+      res.status(504).json({ err: `${err}` });
+    } finally {
+      prisma.$disconnect();
     }
   }
 }

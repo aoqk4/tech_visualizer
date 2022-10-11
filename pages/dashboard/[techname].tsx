@@ -1,5 +1,6 @@
-import Layout from "../components/Layout";
+import Layout from "../../components/Layout";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import {
   BarElement,
   CategoryScale,
@@ -12,8 +13,8 @@ import {
   Legend,
   Tooltip,
 } from "chart.js";
-import Link from "next/link";
-import { Bar, Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
+import MCharts from "../../components/MChart";
 
 type needDataType = {
   tchlgyIndcprDtl: String;
@@ -92,32 +93,37 @@ export default function DashBoard() {
     ],
   });
 
-  Chart.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    BarElement,
-    Legend,
-    Tooltip
-  );
-  const configs: ChartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: true,
-        align: "end",
+  const [nData2, setnData2] = useState<ChartData<"bar", Number[], String>>({
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+      {
+        type: "bar",
+        label: "Dataset 1",
+        borderColor: "rgb(54, 162, 235)",
+        borderWidth: 2,
+        data: [3, 4, 7, 8, 1],
       },
-      tooltip: {
-        mode: "index",
-        intersect: true,
+      {
+        type: "bar",
+        label: "Dataset 2",
+        backgroundColor: "rgb(255, 99, 132)",
+        data: [1, 2, 3, 4, 5, 8],
+        borderColor: "red",
+        borderWidth: 2,
       },
-    },
-  };
+      {
+        type: "bar",
+        label: "Dataset 3",
+        backgroundColor: "rgb(75, 192, 192)",
+        data: [1, 2, 3, 4, 5],
+      },
+    ],
+  });
 
-  Chart.defaults.color = "#ffffff";
+  const router = useRouter();
+
   function dataTest() {
-    fetch("api/stest")
+    fetch("http://localhost:3000/api/stest")
       .then((res) => res.json())
       .then((json) => {
         return json.result;
@@ -134,7 +140,7 @@ export default function DashBoard() {
           datasets: [
             {
               type: "bar",
-              label: "R&D 투자액 (만원)",
+              label: "R&D 투자액 (백만원)",
               hoverBorderColor: "purple",
               borderColor: "green",
               borderWidth: 2,
@@ -152,9 +158,9 @@ export default function DashBoard() {
   }
 
   function dataTest2() {
-    fetch("api/techneeds", {
+    fetch("http://localhost:3000/api/techneeds", {
       method: "POST",
-      body: "에너지",
+      body: router.query.techname?.toString(),
     })
       .then((res) => res.json())
       .then((json) => {
@@ -192,9 +198,51 @@ export default function DashBoard() {
       });
   }
 
+  function dataTest3() {
+    fetch("http://localhost:3000/api/techneeds", {
+      method: "POST",
+      body: router.query.techname?.toString(),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        return json.result;
+      })
+      .then((result: needDataType[]) => {
+        return result;
+      })
+      .then((arr: needDataType[]) => {
+        let farr = arr.map((ele) => ele.tpDmandCdNm);
+
+        const set = new Set(farr);
+
+        const label = Array.from(set);
+
+        let cnt: Number[] = [];
+
+        for (let i = 0; i < label.length; i++) {
+          cnt.push(farr.filter((ele) => ele === label[i]).length);
+        }
+
+        setnData2({
+          labels: label,
+          datasets: [
+            {
+              type: "bar",
+              label: "개",
+              hoverBorderColor: "purple",
+              borderColor: "rgb(54, 162, 235)",
+              borderWidth: 2,
+              data: [...cnt],
+            },
+          ],
+        });
+      });
+  }
+
   useEffect(() => {
     dataTest();
     dataTest2();
+    dataTest3();
   }, []);
 
   return (
@@ -205,17 +253,20 @@ export default function DashBoard() {
         <div className="w-[90%] font-mono text-4xl text-white font-bold">
           Dash Board
         </div>
-        <div className="h-[80%] w-[90%] flex flex-col">
-          <div className="h-[30%] flex justify-between">
-            <div className=" w-[50%] rounded-xl border-2">
-              {/* <span className="font-bold text-2xl text-white">학술자료</span> */}
-            </div>
-            <div className="w-[50%] rounded-xl">
-              <Bar data={test} options={configs}></Bar>
-            </div>
+        <div className="h-[80%] w-[90%] flex flex-col space-y-56">
+          <div className="h-[40%] rounded-xl">
+            <span className="text-white font-bold text-lg">
+              연구 투자 (R&D){" "}
+            </span>
+            <MCharts data={test}></MCharts>
           </div>
-          <div className="h-[50%] rounded-xl ">
-            <Bar data={nData} options={configs} />
+          <div className="h-[40%] rounded-xl flex space-x-10 justify-evenly">
+            <div className="w-[40%]">
+              <MCharts data={nData}></MCharts>
+            </div>
+            <div className="w-[40%]">
+              <MCharts data={nData2}></MCharts>
+            </div>
           </div>
         </div>
       </div>
