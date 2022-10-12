@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import convert from "xml-js";
-import { PrismaClient, techMarketInfo, techNeeds } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -51,20 +51,19 @@ export default async function handler(
     }
   } else if (req.method === "POST") {
     try {
-      console.log(req.body);
-
-      const tsearchData = await prisma.techMarketInfo.findMany({
+      const tsearchData1 = await prisma.techMarketInfo.findMany({
         where: {
           kwrdDtl: {
-            has: req.body.toString(),
+            has: req.body,
           },
         },
         select: {
           tcateNames: true,
+          indcateNames: true,
         },
       });
 
-      res.status(200).json({ result: tsearchData });
+      res.status(200).json({ result: tsearchData1 });
     } catch (err) {
       res.status(504).json({ err: `${err}` });
     } finally {
