@@ -60,7 +60,7 @@ export default async function handler(
         where: {
           NOT: {
             kwrdDtl: {
-              equals: null,
+              has: null,
             },
           },
           AND: {
