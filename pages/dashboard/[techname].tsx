@@ -248,25 +248,19 @@ export default function DashBoard() {
   return (
     <div>
       <Layout></Layout>
-      <div className="bg-slate-700 w-full h-[200vh] flex flex-col justify-start items-center space-y-10">
+      <div className="bg-slate-700 w-full h-[150vh] flex flex-col justify-start items-center space-y-10">
         <div></div>
         <div className="w-[90%] font-mono text-4xl text-white font-bold">
           Dash Board
         </div>
-        <div className="h-[80%] w-[90%] flex flex-col space-y-56">
-          <div className="h-[40%] rounded-xl">
-            <span className="text-white font-bold text-lg">
-              연구 투자 (R&D){" "}
-            </span>
+        <div className="h-[80%] w-[90%] flex justify-evenly space-x-14">
+          <div className="h-[40%] rounded-xl w-[50%] space-y-12 ">
             <MCharts data={test}></MCharts>
+            <MCharts data={nData}></MCharts>
           </div>
-          <div className="h-[40%] rounded-xl flex space-x-10 justify-evenly">
-            <div className="w-[40%]">
-              <MCharts data={nData}></MCharts>
-            </div>
-            <div className="w-[40%]">
-              <MCharts data={nData2}></MCharts>
-            </div>
+          <div className="h-[40%] rounded-xl w-[50%] flex flex-col space-y-12">
+            <MCharts data={nData2}></MCharts>
+            <MCharts data={nData2}></MCharts>
           </div>
         </div>
       </div>

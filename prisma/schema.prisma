@@ -10,25 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id       String       @id @default(auto()) @map("_id") @db.ObjectId
-  email    String
-  password String
-  name     String?
-  services servicelog[]
-  createAt DateTime     @default(now())
-  updateAt DateTime     @updatedAt
-}
-
-model servicelog {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  techName String
-  user     user?    @relation(fields: [userId], references: [id])
-  userId   String?  @db.ObjectId
-  createAt DateTime @default(now())
-  updateAt DateTime @updatedAt
-}
-
 model techNeeds {
   id                String   @id @default(auto()) @map("_id") @db.ObjectId
   buyKindNm         String? // 희망 구매 유형
@@ -51,4 +32,52 @@ model techMarketInfo {
   sltchNm       String? // 판매기술명
   tcateNamem    String? // 과학기술중분류명
   tcateNames    String? //과학기술소분류명
+}
+
+// for User
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }

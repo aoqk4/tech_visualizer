@@ -11,12 +11,11 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { Line } from "react-chartjs-2";
 import Layout from "../components/Layout";
-
-// import { useSession } from "next-auth/react";
+import { RESET_LOGIN, ADD_LOGIN } from "../reducers/testreducer";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../reducers";
 
 const Home: NextPage = () => {
-  // const { data: session } = useSession();
-
   Chart.register(
     CategoryScale,
     LinearScale,
