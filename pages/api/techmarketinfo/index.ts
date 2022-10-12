@@ -15,6 +15,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  const want: any | undefined = req.body?.toString();
+
   if (req.method === "GET") {
     try {
       fetch(
@@ -53,9 +55,7 @@ export default async function handler(
     try {
       const tsearchData1 = await prisma.techMarketInfo.findMany({
         where: {
-          kwrdDtl: {
-            hasEvery: req.body,
-          },
+          kwrdDtl: want,
         },
         select: {
           tcateNames: true,
