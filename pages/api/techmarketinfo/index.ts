@@ -51,12 +51,12 @@ export default async function handler(
     }
   } else if (req.method === "POST") {
     try {
-      const want: string = req.body?.toString();
+      const want: string = req.body.toString();
 
       const tsearchData1 = await prisma.techMarketInfo.findMany({
         where: {
           kwrdDtl: {
-            has: want !== null ? want : "",
+            has: want !== null ? want : "a",
           },
         },
         select: {
