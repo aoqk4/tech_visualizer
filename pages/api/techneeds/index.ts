@@ -55,7 +55,7 @@ export default async function handler(
       const tsearchData = await prisma.techNeeds.findMany({
         where: {
           keyword: {
-            has: "a",
+            hasSome: "a",
           },
         },
         select: {
