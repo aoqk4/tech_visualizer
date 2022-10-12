@@ -58,18 +58,13 @@ export default async function handler(
           tcateNames: true,
         },
         where: {
-          NOT: {
-            kwrdDtl: {
-              has: null,
-            },
-          },
-          AND: {
-            kwrdDtl: {
-              has: req.body,
-            },
+          kwrdDtl: {
+            has: req.body,
           },
         },
       });
+
+      res.status(200).json({ result: setData });
     } catch (err) {
       res.status(504).json({ err: `${err}` });
     } finally {
