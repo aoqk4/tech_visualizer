@@ -59,6 +59,11 @@ export default async function handler(
             isEmpty: false,
             has: req.body,
           },
+          OR: {
+            kwrdDtl: {
+              has: req.body,
+            },
+          },
         },
         select: {
           tcateNames: true,
