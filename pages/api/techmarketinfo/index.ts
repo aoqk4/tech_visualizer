@@ -34,7 +34,7 @@ export default async function handler(
           result.response.body.items.item.map((ele: any, idx: any) => {
             let testobj = {
               devStatusName: ele?.devStatusName?._text || "",
-              kwrdDtl: ele?.kwrdDtl?._text?.split(",") || "",
+              kwrdDtl: ele?.kwrdDtl?._text?.split(",") || [],
               slePc: ele?.slePc?._text || "",
               tcateNames: ele?.tcateNames?._text || "",
               indcateNames: ele?.indcateNames?._text || "",
