@@ -61,6 +61,13 @@ export default async function handler(
           kwrdDtl: {
             has: req.body,
           },
+          AND: {
+            NOT: {
+              kwrdDtl: {
+                equals: null,
+              },
+            },
+          },
         },
       });
     } catch (err) {
