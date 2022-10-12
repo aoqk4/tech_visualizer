@@ -48,7 +48,7 @@ const Login: NextPage = (props) => {
               dispatch({
                 type: ADD_LOGIN,
               });
-              console.log(logined);
+              console.log(a.logined);
             }}
             className="flex items-center justify-center w-[70%] h-[10%] rounded-md bg-blue-400 text-white font-bold text-lg"
           >
