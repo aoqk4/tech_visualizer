@@ -55,8 +55,9 @@ export default async function handler(
     try {
       const tsearchData1 = await prisma.techMarketInfo.findMany({
         where: {
-          kwrdDtl: {
-            has: want,
+          kwrdDtl: req.body || {
+            isEmpty: false,
+            has: req.body,
           },
         },
         select: {
