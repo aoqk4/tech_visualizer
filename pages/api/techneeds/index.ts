@@ -65,6 +65,8 @@ export default async function handler(
         },
       });
 
+      console.log(tsearchData);
+
       res.status(200).json({ result: tsearchData });
     } catch (err) {
       res.status(504).json({ err: `${err}` });
