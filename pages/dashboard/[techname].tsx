@@ -261,19 +261,31 @@ export default function DashBoard() {
   return (
     <div>
       <Layout></Layout>
-      <div className="bg-slate-700 w-full h-[150vh] flex flex-col justify-start items-center space-y-10">
+      <div className="bg-slate-700 w-full h-[150vh] flex flex-col justify-start items-center space-y-10 flex-wrap">
         <div></div>
         <div className="w-[90%] font-mono text-4xl text-white font-bold">
-          Dash Board
+          {router.query.techname?.toString()}
         </div>
         <div className="h-[80%] w-[90%] flex justify-evenly space-x-14">
           <div className="h-[40%] rounded-xl w-[50%] space-y-12 ">
-            <MCharts data={mData}></MCharts>
-            <MCharts data={nData}></MCharts>
+            <div>
+              <span className="text-white text-lg">시장</span>
+              <MCharts data={mData}></MCharts>
+            </div>
+            <div>
+              <span className="text-white text-lg">수요</span>
+              <MCharts data={nData}></MCharts>
+            </div>
           </div>
           <div className="h-[40%] rounded-xl w-[50%] flex flex-col space-y-12">
-            <MCharts data={test}></MCharts>
-            <MCharts data={nData2}></MCharts>
+            <div>
+              <span className="text-white text-lg">통계(R&D OR 매출액)</span>
+              <MCharts data={test}></MCharts>
+            </div>
+            <div>
+              <span className="text-white text-lg">수요 지역</span>
+              <MCharts data={nData2}></MCharts>
+            </div>
           </div>
         </div>
       </div>
