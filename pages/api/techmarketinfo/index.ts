@@ -34,7 +34,7 @@ export default async function handler(
           result.response.body.items.item.map((ele: any, idx: any) => {
             let testobj = {
               devStatusName: ele?.devStatusName?._text || "",
-              kwrdDtl: ele?.kwrdDtl?._text?.split(",") || [],
+              kwrdDtl: ele?.kwrdDtl?._text?.split(",") || ["a", "b", "c"],
               slePc: ele?.slePc?._text || "",
               tcateNames: ele?.tcateNames?._text || "",
               indcateNames: ele?.indcateNames?._text || "",
@@ -63,6 +63,8 @@ export default async function handler(
           tcateNames: true,
         },
       });
+
+      console.log(req.body);
 
       res.status(200).json({ result: tsearchData });
     } catch (err) {
