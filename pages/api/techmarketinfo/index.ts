@@ -33,11 +33,11 @@ export default async function handler(
 
           result.response.body.items.item.map((ele: any, idx: any) => {
             let testobj = {
-              devStatusName: ele?.devStatusName?._text || "",
+              devStatusName: ele?.devStatusName?._text || "없음",
               kwrdDtl: ele?.kwrdDtl?._text?.split(",") || ["a", "b", "c"],
-              slePc: ele?.slePc?._text || "",
-              tcateNames: ele?.tcateNames?._text || "",
-              indcateNames: ele?.indcateNames?._text || "",
+              slePc: ele?.slePc?._text || "없음",
+              tcateNames: ele?.tcateNames?._text || "없음",
+              indcateNames: ele?.indcateNames?._text || "없음",
             };
             obj.push(testobj);
           });
