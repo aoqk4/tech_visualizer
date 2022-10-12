@@ -53,17 +53,16 @@ export default async function handler(
     }
   } else if (req.method === "POST") {
     try {
-      const tsearchData1 = await prisma.techMarketInfo.findMany({
+      const setData = prisma.techMarketInfo.findMany({
+        select: {
+          tcateNames: true,
+        },
         where: {
           kwrdDtl: {
             has: req.body,
           },
         },
-        select: {
-          tcateNames: true,
-        },
       });
-      res.status(200).json({ result: tsearchData1 });
     } catch (err) {
       res.status(504).json({ err: `${err}` });
     } finally {
