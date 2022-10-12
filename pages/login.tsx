@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../reducers";
 
 const Login: NextPage = (props) => {
-  const { logined } = useSelector((state: RootState) => state.testReducer);
+  const a = useSelector((state: RootState) => state.testReducer);
 
-  console.log(logined);
+  console.log(a.logined);
 
   const dispatch = useDispatch();
   return (

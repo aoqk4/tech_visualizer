@@ -123,7 +123,7 @@ export default function DashBoard() {
   const router = useRouter();
 
   function dataTest() {
-    fetch("http://localhost:3000/api/stest")
+    fetch("../api/stest")
       .then((res) => res.json())
       .then((json) => {
         return json.result;
@@ -158,7 +158,7 @@ export default function DashBoard() {
   }
 
   function dataTest2() {
-    fetch("http://localhost:3000/api/techneeds", {
+    fetch("../api/techneeds", {
       method: "POST",
       body: router.query.techname?.toString(),
     })
@@ -199,7 +199,7 @@ export default function DashBoard() {
   }
 
   function dataTest3() {
-    fetch("http://localhost:3000/api/techneeds", {
+    fetch("../api/techneeds", {
       method: "POST",
       body: router.query.techname?.toString(),
     })
