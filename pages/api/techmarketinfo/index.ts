@@ -58,8 +58,15 @@ export default async function handler(
           tcateNames: true,
         },
         where: {
-          kwrdDtl: {
-            has: req.body,
+          NOT: {
+            kwrdDtl: {
+              equals: null,
+            },
+          },
+          AND: {
+            kwrdDtl: {
+              has: req.body,
+            },
           },
         },
       });
