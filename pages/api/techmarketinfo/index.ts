@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import convert from "xml-js";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, techMarketInfo } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -29,8 +29,6 @@ export default async function handler(
 
           let obj: object[] = [];
 
-          // console.log(result.response.body.items.item[0]);
-
           result.response.body.items.item.map((ele: any, idx: any) => {
             let testobj = {
               kwrdDtl: ele?.kwrdDtl?._text?.split(",") || ["a", "b", "c"],
@@ -50,10 +48,11 @@ export default async function handler(
     }
   } else if (req.method === "POST") {
     try {
-      const tsearchData2: any = await prisma.techMarketInfo.findMany({
+      const tsearchData2 = await prisma.techMarketInfo.findMany({
         where: {
           kwrdDtl: {
             has: req.body,
+            isEmpty: false,
           },
         },
         select: {
