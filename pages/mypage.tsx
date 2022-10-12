@@ -64,9 +64,7 @@ export default function MyPage() {
                     <option value={"에너지"}>에너지</option>
                     <option value={"반도체"}>반도체</option>
                     <option value={"무선"}>무선</option>
-                    <option value={"ICT"}>ICT</option>
                     <option value={"플라즈마"}>플라즈마</option>
-                    <option value={""}>분석</option>
                   </select>
                 </div>
                 <Link href={`/dashboard/${sreq}`}>
