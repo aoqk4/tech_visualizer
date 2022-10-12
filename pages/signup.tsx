@@ -6,13 +6,6 @@ const Signup = () => {
   const [psd, setPsd] = useState(" ");
   const [nname, setnname] = useState(" ");
 
-  let obj = {
-    email,
-    psd,
-    nname,
-    wreq: 1,
-  };
-
   function checkEmail(event: React.ChangeEvent<HTMLInputElement>) {
     if (
       !event.target.value.match(
@@ -22,35 +15,6 @@ const Signup = () => {
       alert("유효하지 않은 이메일!");
       return;
     }
-    fetch("api/signup", {
-      method: "POST",
-      body: JSON.stringify(obj),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.result?.email) {
-          alert("중복된 이메일");
-          return;
-        }
-      });
-  }
-
-  function atSubmit() {
-    if (!psd || !email) {
-      alert("필수 사항을 모두 입력하세요.");
-      return;
-    } else {
-      obj.wreq = 2;
-      fetch("/api/signup", {
-        method: "POST",
-        body: JSON.stringify(obj),
-      }).then(() => {
-        console.log("회원가입이 완료되었습니다.");
-        return;
-      });
-    }
-
-    return;
   }
 
   return (
@@ -87,10 +51,7 @@ const Signup = () => {
               onChange={(event) => setnname(event.target.value)}
             ></input>
           </div>
-          <button
-            className="w-[50%] bg-indigo-500 text-4xl py-3 font-mono font-bold rounded-md"
-            onClick={atSubmit}
-          >
+          <button className="w-[50%] bg-indigo-500 text-4xl py-3 font-mono font-bold rounded-md">
             Sign Up
           </button>
         </form>

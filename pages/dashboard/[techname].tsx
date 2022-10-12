@@ -23,6 +23,10 @@ type needDataType = {
   buyKindNm: String;
 };
 
+type mDataType = {
+  tcateNames: String;
+};
+
 type testType = {
   TBL_NM?: string;
   PRD_DE?: string;
@@ -41,81 +45,48 @@ type testType = {
 
 export default function DashBoard() {
   const [test, setTest] = useState<ChartData<"bar", Number[], String>>({
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: [""],
     datasets: [
       {
         type: "bar",
-        label: "Dataset 1",
-        borderColor: "rgb(54, 162, 235)",
-        borderWidth: 2,
-        data: [3, 4, 7, 8, 1],
-      },
-      {
-        type: "bar",
-        label: "Dataset 2",
-        backgroundColor: "rgb(255, 99, 132)",
-        data: [1, 2, 3, 4, 5, 8],
-        borderColor: "red",
-        borderWidth: 2,
-      },
-      {
-        type: "bar",
-        label: "Dataset 3",
+        label: "",
         backgroundColor: "rgb(75, 192, 192)",
-        data: [1, 2, 3, 4, 5],
+        data: [0],
       },
     ],
   });
   const [nData, setnData] = useState<ChartData<"bar", Number[], String>>({
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: [""],
     datasets: [
       {
         type: "bar",
-        label: "Dataset 1",
-        borderColor: "rgb(54, 162, 235)",
-        borderWidth: 2,
-        data: [3, 4, 7, 8, 1],
-      },
-      {
-        type: "bar",
-        label: "Dataset 2",
-        backgroundColor: "rgb(255, 99, 132)",
-        data: [1, 2, 3, 4, 5, 8],
-        borderColor: "red",
-        borderWidth: 2,
-      },
-      {
-        type: "bar",
-        label: "Dataset 3",
+        label: "",
         backgroundColor: "rgb(75, 192, 192)",
-        data: [1, 2, 3, 4, 5],
+        data: [0],
       },
     ],
   });
 
   const [nData2, setnData2] = useState<ChartData<"bar", Number[], String>>({
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: [""],
     datasets: [
       {
         type: "bar",
-        label: "Dataset 1",
-        borderColor: "rgb(54, 162, 235)",
-        borderWidth: 2,
-        data: [3, 4, 7, 8, 1],
-      },
-      {
-        type: "bar",
-        label: "Dataset 2",
-        backgroundColor: "rgb(255, 99, 132)",
-        data: [1, 2, 3, 4, 5, 8],
-        borderColor: "red",
-        borderWidth: 2,
-      },
-      {
-        type: "bar",
-        label: "Dataset 3",
+        label: "",
         backgroundColor: "rgb(75, 192, 192)",
-        data: [1, 2, 3, 4, 5],
+        data: [0],
+      },
+    ],
+  });
+
+  const [mData, setmData] = useState<ChartData<"bar", Number[], String>>({
+    labels: [""],
+    datasets: [
+      {
+        type: "bar",
+        label: "",
+        backgroundColor: "rgb(75, 192, 192)",
+        data: [0],
       },
     ],
   });
@@ -239,10 +210,52 @@ export default function DashBoard() {
       });
   }
 
+  function dataTest4() {
+    fetch("../api/techmarketinfo", {
+      method: "POST",
+      body: router.query.techname?.toString(),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        return json.result;
+      })
+      .then((result: mDataType[]) => {
+        return result;
+      })
+      .then((arr: mDataType[]) => {
+        let farr = arr.map((ele) => ele.tcateNames);
+
+        const set = new Set(farr);
+
+        const label = Array.from(set);
+
+        let cnt: Number[] = [];
+
+        for (let i = 0; i < label.length; i++) {
+          cnt.push(farr.filter((ele) => ele === label[i]).length);
+        }
+
+        setmData({
+          labels: label,
+          datasets: [
+            {
+              type: "bar",
+              label: "개",
+              hoverBorderColor: "purple",
+              borderColor: "rgb(54, 162, 235)",
+              borderWidth: 2,
+              data: [...cnt],
+            },
+          ],
+        });
+      });
+  }
+
   useEffect(() => {
     dataTest();
     dataTest2();
     dataTest3();
+    dataTest4();
   }, []);
 
   return (
@@ -255,11 +268,11 @@ export default function DashBoard() {
         </div>
         <div className="h-[80%] w-[90%] flex justify-evenly space-x-14">
           <div className="h-[40%] rounded-xl w-[50%] space-y-12 ">
-            <MCharts data={test}></MCharts>
+            <MCharts data={mData}></MCharts>
             <MCharts data={nData}></MCharts>
           </div>
           <div className="h-[40%] rounded-xl w-[50%] flex flex-col space-y-12">
-            <MCharts data={nData2}></MCharts>
+            <MCharts data={test}></MCharts>
             <MCharts data={nData2}></MCharts>
           </div>
         </div>

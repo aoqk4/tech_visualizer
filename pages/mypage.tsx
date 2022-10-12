@@ -33,15 +33,11 @@ export default function MyPage() {
                 <label className="text-3xl font-mono font-bold text-white">
                   Email
                 </label>
-                <div className="text-2xl font-mono font-bold text-white">
-                  이메일 나올 곳
-                </div>
+                <div className="text-2xl font-mono font-bold text-white"></div>
                 <label className="text-3xl font-mono font-bold text-white">
                   NickName
                 </label>
-                <div className="text-2xl font-mono font-bold text-white">
-                  닉넴 나올 곳
-                </div>
+                <div className="text-2xl font-mono font-bold text-white"></div>
               </div>
             </div>
           )}
@@ -50,9 +46,7 @@ export default function MyPage() {
               <div className="text-4xl font-mono font-bold text-white">
                 이용내역
               </div>
-              <div className="w-full h-[70%] flex justify-center items-center">
-                이용내역 나올 자리
-              </div>
+              <div className="w-full h-[70%] flex justify-center items-center"></div>
             </div>
           )}
           {stat === 3 && (
@@ -69,10 +63,10 @@ export default function MyPage() {
                   >
                     <option value={"에너지"}>에너지</option>
                     <option value={"반도체"}>반도체</option>
-                    <option value={"블록체인"}>블록체인</option>
+                    <option value={"무선"}>무선</option>
                     <option value={"ICT"}>ICT</option>
-                    <option value={"융합"}>융합</option>
-                    <option value={"분석"}>분석</option>
+                    <option value={"플라즈마"}>플라즈마</option>
+                    <option value={""}>분석</option>
                   </select>
                 </div>
                 <Link href={`/dashboard/${sreq}`}>

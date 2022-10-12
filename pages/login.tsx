@@ -1,16 +1,8 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { RESET_LOGIN, ADD_LOGIN } from "../reducers/testreducer";
 import Layout from "../components/Layout";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../reducers";
 
 const Login: NextPage = (props) => {
-  const a = useSelector((state: RootState) => state.testReducer);
-
-  console.log(a.logined);
-
-  const dispatch = useDispatch();
   return (
     <div>
       <Layout></Layout>
@@ -43,27 +35,11 @@ const Login: NextPage = (props) => {
               className="text-4xl bg-slate-300 rounded-lg"
             ></input>
           </div>
-          <button
-            onClick={() => {
-              dispatch({
-                type: ADD_LOGIN,
-              });
-              console.log(a.logined);
-            }}
-            className="flex items-center justify-center w-[70%] h-[10%] rounded-md bg-blue-400 text-white font-bold text-lg"
-          >
-            LOGIN
-          </button>
-          <button
-            onClick={() => {
-              dispatch({
-                type: RESET_LOGIN,
-              });
-            }}
-            className="flex items-center justify-center w-[70%] h-[10%] rounded-md bg-blue-400 text-white font-bold text-lg"
-          >
-            123132123123
-          </button>
+          <Link href={"/mypage"}>
+            <button className="flex items-center justify-center w-[70%] h-[10%] rounded-md bg-blue-400 text-white font-bold text-lg">
+              LOGIN
+            </button>
+          </Link>
         </div>
       </div>
     </div>
