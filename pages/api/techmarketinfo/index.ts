@@ -56,16 +56,13 @@ export default async function handler(
       const tsearchData1 = await prisma.techMarketInfo.findMany({
         where: {
           kwrdDtl: {
-            equals: req.body,
+            has: req.body,
           },
         },
         select: {
           tcateNames: true,
         },
       });
-
-      console.log(tsearchData1);
-
       res.status(200).json({ result: tsearchData1 });
     } catch (err) {
       res.status(504).json({ err: `${err}` });
