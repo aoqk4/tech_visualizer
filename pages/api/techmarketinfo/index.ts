@@ -27,13 +27,24 @@ export default async function handler(
 
           let obj: object[] = [];
 
-          result.response.body.items.item.map((ele: any, idx: any) => {
+          let filterArr = result.response.body.items.item.filter(
+            (ele: any, idx: any) => {
+              if (ele?.kwrdDtl?._text === "., , , ," || !ele?.kwrdDtl?._text) {
+                return false;
+              } else {
+                return true;
+              }
+            }
+          );
+
+          filterArr.map((ele: any) => {
             let testobj = {
-              kwrdDtl: ele?.kwrdDtl?._text?.split(",") || ["a", "b", "c"],
+              kwrdDtl: ele.kwrdDtl._text.split(","),
               tcateNames: ele?.tcateNames?._text || "없음",
             };
             obj.push(testobj);
           });
+
           const techMarketInfo = await prisma.techMarketInfo.createMany({
             data: obj,
           });
@@ -51,6 +62,11 @@ export default async function handler(
           kwrdDtl: {
             // @ts-ignore
             has: req.body.toString(),
+          },
+          AND: {
+            tcateNames: {
+              not: null,
+            },
           },
         },
         select: {
