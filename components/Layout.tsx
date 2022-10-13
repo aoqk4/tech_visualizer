@@ -13,7 +13,7 @@ export default function Layout(props: LayoutProps) {
     <nav className="flex justify-between items-center font-bold bg-slate-700 text-white pt-6">
       <div className="text-4xl font-mono">
         <Link href={"/"}>
-          <button className="pl-8">TITLE</button>
+          <button className="pl-8">Tech Vis</button>
         </Link>
       </div>
       <div className="flex ">
