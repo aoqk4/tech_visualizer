@@ -23,7 +23,6 @@ model techNeeds {
 }
 
 model techMarketInfo {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  kwrdDtl    String[] @default(["a"]) // 키워드
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
   tcateNames String //과학기술소분류명
 }

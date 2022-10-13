@@ -27,21 +27,7 @@ export default async function handler(
 
           let obj: any[] = [];
 
-          let filterArr = result.response.body.items.item.filter(
-            (ele: any, idx: any) => {
-              if (
-                ele?.kwrdDtl?._text === "., , , ," ||
-                !ele?.kwrdDtl?._text ||
-                !ele.tcateNames?._text
-              ) {
-                return false;
-              } else {
-                return true;
-              }
-            }
-          );
-
-          filterArr.map((ele: any) => {
+          result.response.body.items.item.map((ele: any) => {
             let testobj = {
               tcateNames: ele?.tcateNames?._text,
             };
