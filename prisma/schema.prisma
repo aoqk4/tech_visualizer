@@ -25,5 +25,5 @@ model techNeeds {
 model techMarketInfo {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   kwrdDtl    String[] @default(["a"]) // 키워드
-  tcateNames String? //과학기술소분류명
+  tcateNames String //과학기술소분류명
 }

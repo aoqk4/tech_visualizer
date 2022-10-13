@@ -25,7 +25,7 @@ export default async function handler(
         .then(async (json) => {
           let result = JSON.parse(json);
 
-          let obj: object[] = [];
+          let obj: any[] = [];
 
           let filterArr = result.response.body.items.item.filter(
             (ele: any, idx: any) => {
@@ -71,10 +71,6 @@ export default async function handler(
           tcateNames: true,
         },
       });
-
-      console.log(req.body);
-
-      console.log(tsearchData2);
 
       res.status(200).json({ result: tsearchData2 });
     } catch (err) {
