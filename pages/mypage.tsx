@@ -63,7 +63,7 @@ export default function MyPage() {
                     className="text-slate-800"
                   ></input>
                 </div>
-                <Link href={`/dashboard/${sreq}`}>
+                <Link href={`/dashboard/${sreq ? sreq : "기술"}`}>
                   <button className="bg-neutral-600 p-3 rounded-lg">
                     서비스 신청
                   </button>
