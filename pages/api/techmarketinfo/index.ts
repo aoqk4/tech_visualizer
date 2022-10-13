@@ -43,7 +43,6 @@ export default async function handler(
 
           filterArr.map((ele: any) => {
             let testobj = {
-              kwrdDtl: ele?.kwrdDtl?._text?.split(","),
               tcateNames: ele?.tcateNames?._text,
             };
             obj.push(testobj);
