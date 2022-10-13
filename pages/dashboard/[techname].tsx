@@ -37,14 +37,14 @@ type testType = {
   UNIT_NM?: string;
   UNIT_NM_ENG?: string;
   C1_OBJ_NM?: string;
-  DT?: string;
+  DT: string;
   PRD_SE?: string;
   C1?: string;
-  C1_NM?: string;
+  C1_NM: string;
 };
 
 export default function DashBoard() {
-  const [test, setTest] = useState<ChartData<"bar", Number[], String>>({
+  const [tData, setTdata] = useState<ChartData<"bar", Number[], String>>({
     labels: [""],
     datasets: [
       {
@@ -94,34 +94,60 @@ export default function DashBoard() {
   const router = useRouter();
 
   function dataTest() {
-    fetch("../api/stest")
+    fetch("../api/kosis")
       .then((res) => res.json())
       .then((json) => {
         return json.result;
       })
       .then((dat: testType[]) => {
-        setTest({
-          labels: [
-            dat[5].C1_NM || "정보없음",
-            dat[7].C1_NM || "정보없음",
-            dat[9].C1_NM || "정보없음",
-            dat[11].C1_NM || "정보없음",
-            dat[15].C1_NM || "정보없음",
-          ],
+        let data2018: testType[] = [];
+        let data2019: testType[] = [];
+        let data2020: testType[] = [];
+
+        dat.map((ele) => {
+          if (ele.PRD_DE === "2018") {
+            data2018.push(ele);
+          } else if (ele.PRD_DE === "2019") {
+            data2019.push(ele);
+          } else if (ele.PRD_DE === "2020") {
+            data2020.push(ele);
+          }
+        });
+
+        let label: String[] = data2018.map((ele) => ele?.C1_NM);
+
+        let dt2018 = data2018.map((ele) => parseInt(ele.DT?.toString()));
+        let dt2019 = data2019.map((ele) => parseInt(ele.DT?.toString()));
+        let dt2020 = data2020.map((ele) => parseInt(ele.DT?.toString()));
+
+        setTdata({
+          labels: label,
           datasets: [
             {
               type: "bar",
-              label: "R&D 투자액 (백만원)",
+              label: "2018 (억원)",
+              hoverBorderColor: "purple",
+              borderColor: "white",
+              borderWidth: 2,
+              data: [...dt2018],
+              hidden: true,
+            },
+            {
+              type: "bar",
+              label: "2019 (억원)",
               hoverBorderColor: "purple",
               borderColor: "green",
               borderWidth: 2,
-              data: [
-                parseInt(dat[5].DT || "0"),
-                parseInt(dat[7].DT || "0"),
-                parseInt(dat[9].DT || "0"),
-                parseInt(dat[11].DT || "0"),
-                parseInt(dat[15].DT || "0"),
-              ],
+              data: [...dt2018],
+              hidden: true,
+            },
+            {
+              type: "bar",
+              label: "2020 (억원)",
+              hoverBorderColor: "purple",
+              borderColor: "rgb(000,153,255)",
+              borderWidth: 2,
+              data: [...dt2018],
             },
           ],
         });
@@ -217,7 +243,6 @@ export default function DashBoard() {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         return json.result;
       })
       .then((result: mDataType[]) => {
@@ -237,7 +262,7 @@ export default function DashBoard() {
         }
 
         setmData({
-          labels: label,
+          labels: label || "정보없음",
           datasets: [
             {
               type: "bar",
@@ -258,6 +283,8 @@ export default function DashBoard() {
     dataTest3();
     dataTest4();
   }, []);
+
+  parseInt("string"?.toString());
 
   return (
     <div>
@@ -281,7 +308,7 @@ export default function DashBoard() {
           <div className="h-[40%] rounded-xl w-[50%] flex flex-col space-y-12">
             <div>
               <span className="text-white text-lg">통계(R&D OR 매출액)</span>
-              <MCharts data={test}></MCharts>
+              <MCharts data={tData}></MCharts>
             </div>
             <div>
               <span className="text-white text-lg">수요 지역</span>

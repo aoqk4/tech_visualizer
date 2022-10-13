@@ -57,15 +57,11 @@ export default function MyPage() {
               <div className="w-full h-[80%] flex flex-col items-center justify-around text-white text-3xl font-bold">
                 <div className="w-full flex justify-center space-x-8 ">
                   <label>신청 기술</label>
-                  <select
-                    className="w-[60%] text-slate-800"
-                    onChange={(e) => setSreq(e.currentTarget.value)}
-                  >
-                    <option value={"에너지"}>에너지</option>
-                    <option value={"반도체"}>반도체</option>
-                    <option value={"무선"}>무선</option>
-                    <option value={"플라즈마"}>플라즈마</option>
-                  </select>
+                  <input
+                    type={"text"}
+                    onChange={(e) => setSreq(e.target.value)}
+                    className="text-slate-800"
+                  ></input>
                 </div>
                 <Link href={`/dashboard/${sreq}`}>
                   <button className="bg-neutral-600 p-3 rounded-lg">
