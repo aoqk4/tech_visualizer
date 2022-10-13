@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 type LayoutProps = {
   children?: React.ReactNode;
@@ -8,6 +9,8 @@ type LayoutProps = {
 
 export default function Layout(props: LayoutProps) {
   const Router = useRouter();
+
+  const { data: session, status } = useSession();
 
   return (
     <nav className="flex justify-between items-center font-bold bg-slate-700 text-white pt-6">
@@ -21,7 +24,9 @@ export default function Layout(props: LayoutProps) {
           <Link href={`/login`}>Documentation</Link>
         </div>
         <div className="pr-12 text-4xl font-mono">
-          <Link href={`/login`}>MyPage</Link>
+          <Link href={status === "authenticated" ? "/mypage" : "/login"}>
+            MyPage
+          </Link>
         </div>
       </div>
     </nav>

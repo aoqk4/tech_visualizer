@@ -1,10 +1,16 @@
 import { useState } from "react";
 import Layout from "../components/Layout";
 import Link from "next/dist/client/link";
+import { signOut, useSession } from "next-auth/react";
 
 export default function MyPage() {
   const [stat, setStat] = useState(1);
   const [sreq, setSreq] = useState("");
+
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
+
+  console.log();
 
   return (
     <div>
@@ -21,7 +27,16 @@ export default function MyPage() {
           <button className="text-2xl" onClick={() => setStat(3)}>
             서비스 신청
           </button>
-          <button className="text-2xl">로그아웃</button>
+          <a
+            className="text-2xl flex justify-center"
+            href={"/api/auth/signin"}
+            onClick={(e) => {
+              e.preventDefault();
+              signOut();
+            }}
+          >
+            로그아웃
+          </a>
         </div>
         <div className="w-[75%] h-[80%] border-2 rounded-2xl flex justify-center items-center">
           {stat === 1 && (
@@ -32,10 +47,12 @@ export default function MyPage() {
               <div className="w-[70%] h-[50%] flex flex-col justify-around">
                 <label className="text-3xl font-mono font-bold text-white">
                   Email
+                  <div className="pt-8">{session?.user?.email}</div>
                 </label>
                 <div className="text-2xl font-mono font-bold text-white"></div>
                 <label className="text-3xl font-mono font-bold text-white">
                   NickName
+                  <div className="pt-8">{session?.user?.name}</div>
                 </label>
                 <div className="text-2xl font-mono font-bold text-white"></div>
               </div>

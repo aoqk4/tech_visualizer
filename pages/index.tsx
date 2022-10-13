@@ -50,13 +50,6 @@ const Home: NextPage = () => {
             <Line data={data} />
           </div>
         </div>
-        <div className=" w-[30%] h-[70%] flex justify-center items-end">
-          <Link href={"/signup"}>
-            <button className="bg-blue-600 w-[30%] h-[10%] rounded-lg text-2xl font-mono font-extrabold text-white mb-8">
-              Sign Up
-            </button>
-          </Link>
-        </div>
       </div>
     </div>
   );
