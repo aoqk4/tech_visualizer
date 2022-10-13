@@ -29,7 +29,11 @@ export default async function handler(
 
           let filterArr = result.response.body.items.item.filter(
             (ele: any, idx: any) => {
-              if (ele?.kwrdDtl?._text === "., , , ," || !ele?.kwrdDtl?._text) {
+              if (
+                ele?.kwrdDtl?._text === "., , , ," ||
+                !ele?.kwrdDtl?._text ||
+                !ele.tcateNames?._text
+              ) {
                 return false;
               } else {
                 return true;
@@ -60,19 +64,17 @@ export default async function handler(
       const tsearchData2 = await prisma.techMarketInfo.findMany({
         where: {
           kwrdDtl: {
-            // @ts-ignore
-            has: req.body.toString(),
-          },
-          AND: {
-            tcateNames: {
-              not: null,
-            },
+            hasSome: [req.body],
           },
         },
         select: {
           tcateNames: true,
         },
       });
+
+      console.log(req.body);
+
+      console.log(tsearchData2);
 
       res.status(200).json({ result: tsearchData2 });
     } catch (err) {

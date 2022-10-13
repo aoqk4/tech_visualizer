@@ -217,6 +217,7 @@ export default function DashBoard() {
     })
       .then((res) => res.json())
       .then((json) => {
+        console.log(json);
         return json.result;
       })
       .then((result: mDataType[]) => {
