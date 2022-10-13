@@ -28,10 +28,10 @@ const Home: NextPage = () => {
     datasets: [
       {
         type: "line",
-        label: "Dataset 1",
+        label: "이용자 수",
         borderColor: "rgb(54, 162, 235)",
         borderWidth: 2,
-        data: [300, 400, 700, 800, 1000],
+        data: [30, 40, 70, 80, 100, 10, 30, 50],
       },
     ],
   };

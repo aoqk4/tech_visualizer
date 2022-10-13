@@ -62,6 +62,7 @@ export default async function handler(
           tchlgyIndcprDtl: true,
           dmdtchNm: true,
           tpDmandCdNm: true,
+          tcntrnFxamtTchfee: true,
         },
       });
 

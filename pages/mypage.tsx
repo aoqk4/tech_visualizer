@@ -44,7 +44,7 @@ export default function MyPage() {
           {stat === 2 && (
             <div className="flex flex-col w-[90%] h-[90%] items-center space-y-32">
               <div className="text-4xl font-mono font-bold text-white">
-                이용내역
+                asdf
               </div>
               <div className="w-full h-[70%] flex justify-center items-center"></div>
             </div>

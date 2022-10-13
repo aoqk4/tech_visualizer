@@ -21,6 +21,7 @@ type needDataType = {
   dmdtchNm: String;
   tpDmandCdNm: String;
   buyKindNm: String;
+  tcntrnFxamtTchfee: String;
 };
 
 type mDataType = {
@@ -127,7 +128,7 @@ export default function DashBoard() {
               type: "bar",
               label: "2018 (억원)",
               hoverBorderColor: "purple",
-              borderColor: "white",
+              borderColor: "pink",
               borderWidth: 2,
               data: [...dt2018],
               hidden: true,
@@ -138,7 +139,7 @@ export default function DashBoard() {
               hoverBorderColor: "purple",
               borderColor: "green",
               borderWidth: 2,
-              data: [...dt2018],
+              data: [...dt2019],
               hidden: true,
             },
             {
@@ -147,7 +148,7 @@ export default function DashBoard() {
               hoverBorderColor: "purple",
               borderColor: "rgb(000,153,255)",
               borderWidth: 2,
-              data: [...dt2018],
+              data: [...dt2020],
             },
           ],
         });
@@ -262,7 +263,7 @@ export default function DashBoard() {
         }
 
         setmData({
-          labels: label || "정보없음",
+          labels: label,
           datasets: [
             {
               type: "bar",
@@ -297,21 +298,23 @@ export default function DashBoard() {
         <div className="h-[80%] w-[90%] flex justify-evenly space-x-14">
           <div className="h-[40%] rounded-xl w-[50%] space-y-12 ">
             <div>
-              <span className="text-white text-lg">시장</span>
+              <span className="text-white text-lg font-bold">시장 상황</span>
               <MCharts data={mData}></MCharts>
             </div>
             <div>
-              <span className="text-white text-lg">수요</span>
+              <span className="text-white text-lg font-bold">수요 상황</span>
               <MCharts data={nData}></MCharts>
             </div>
           </div>
           <div className="h-[40%] rounded-xl w-[50%] flex flex-col space-y-12">
             <div>
-              <span className="text-white text-lg">통계(R&D OR 매출액)</span>
+              <span className="text-white text-lg font-bold">
+                2018-20 분야별 3년간 연구개발 통계
+              </span>
               <MCharts data={tData}></MCharts>
             </div>
             <div>
-              <span className="text-white text-lg">수요 지역</span>
+              <span className="text-white text-lg font-bold">수요 지역</span>
               <MCharts data={nData2}></MCharts>
             </div>
           </div>
