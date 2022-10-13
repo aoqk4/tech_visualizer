@@ -60,8 +60,6 @@ export default async function handler(
     }
   } else if (req.method === "POST") {
     try {
-      console.log(req.body);
-
       const tsearchData2 = await prisma.techMarketInfo.findMany({
         where: {
           tcateNames: {
@@ -69,8 +67,6 @@ export default async function handler(
           },
         },
       });
-
-      console.log(tsearchData2);
 
       res.status(200).json({ result: tsearchData2 });
     } catch (err) {
