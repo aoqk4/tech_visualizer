@@ -37,3 +37,7 @@ next-env.d.ts
 
 # .env for prisma
 .env
+
+
+# for login..
+.env.local

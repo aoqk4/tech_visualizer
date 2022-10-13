@@ -1,8 +1,14 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import Layout from "../components/Layout";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const Login: NextPage = (props) => {
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
+
+  console.log(status);
+
   return (
     <div>
       <Layout></Layout>
@@ -10,15 +16,6 @@ const Login: NextPage = (props) => {
         <div className="border-r-2 border-slate-400 flex space-y-10 flex-col justify-center items-center w-[30%] h-[50%]">
           <span className="font-bold text-5xl text-white">로그인</span>
           <span className="font-bold text-5xl text-white">Login</span>
-          <div>
-            <span className="text-slate-300">회원이 아니시라면?</span>{" "}
-            <Link href={"/signup"}>
-              <span className="text-blue-300 hover:text-blue-500">
-                {" "}
-                회원가입
-              </span>
-            </Link>
-          </div>
         </div>
         <div className="flex flex-col items-start justify-center w-[30%] h-[50%] space-y-12 ">
           <div className="w-[70%] flex flex-col space-y-2">
@@ -40,6 +37,24 @@ const Login: NextPage = (props) => {
               LOGIN
             </button>
           </Link>
+          <a
+            href={"/api/auth/signin"}
+            onClick={(e) => {
+              e.preventDefault();
+              signIn("google");
+            }}
+          >
+            Google Sign in
+          </a>
+          <a
+            href={"/api/auth/signin"}
+            onClick={(e) => {
+              e.preventDefault();
+              signOut();
+            }}
+          >
+            Google Sign out
+          </a>
         </div>
       </div>
     </div>

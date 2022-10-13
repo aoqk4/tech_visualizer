@@ -11,6 +11,7 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { Line } from "react-chartjs-2";
 import Layout from "../components/Layout";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const Home: NextPage = () => {
   Chart.register(
@@ -20,6 +21,10 @@ const Home: NextPage = () => {
     LineElement,
     BarElement
   );
+
+  const { data: session, status } = useSession();
+
+  console.log(status);
 
   Chart.defaults.color = "#ffffff";
 
