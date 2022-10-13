@@ -170,8 +170,6 @@ export default function Test() {
     // dataTest2();
   }, []);
 
-  console.log(search);
-
   return (
     <div className="">
       <div className="">
