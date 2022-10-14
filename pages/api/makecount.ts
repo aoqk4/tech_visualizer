@@ -17,7 +17,7 @@ export default async function handler(
 ) {
   try {
     const wantemail = req.body;
-    const already = prisma.counter.findUnique({
+    const already = await prisma.counter.findUnique({
       where: {
         email: wantemail,
       },
