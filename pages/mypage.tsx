@@ -19,6 +19,11 @@ export default function MyPage() {
       console.log(session);
       router.push("/");
     }
+
+    fetch("api/makecount", {
+      method: "POST",
+      body: session?.user?.email,
+    });
   }, []);
 
   return (

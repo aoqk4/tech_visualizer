@@ -74,11 +74,11 @@ model VerificationToken {
 }
 
 model log {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  createAt  DateTime? @default(now())
-  userId    String?   @db.ObjectId
-  counter   counter?  @relation(fields: [counterId], references: [id])
-  counterId String?   @db.ObjectId
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  createAt     DateTime? @default(now())
+  userId       String?   @db.ObjectId
+  counter      counter?  @relation(fields: [counterEmail], references: [email])
+  counterEmail String?   @db.ObjectId
 }
 
 model counter {
