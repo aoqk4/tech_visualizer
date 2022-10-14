@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Link from "next/dist/client/link";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function MyPage() {
   const [stat, setStat] = useState(1);
@@ -9,6 +10,16 @@ export default function MyPage() {
 
   const { data: session, status } = useSession();
   const loading = status === "loading";
+  // console.log(Date());
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!session) {
+      console.log(session);
+      router.push("/");
+    }
+  }, []);
 
   return (
     <div>
@@ -59,7 +70,7 @@ export default function MyPage() {
           {stat === 2 && (
             <div className="flex flex-col w-[90%] h-[90%] items-center space-y-32">
               <div className="text-4xl font-mono font-bold text-white">
-                asdf
+                이용내역
               </div>
               <div className="w-full h-[70%] flex justify-center items-center"></div>
             </div>

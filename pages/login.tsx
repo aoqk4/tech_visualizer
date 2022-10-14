@@ -2,10 +2,20 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import { signIn, signOut, useSession } from "next-auth/react";
+import MyPage from "./mypage";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const Login: NextPage = (props) => {
   const { data: session, status } = useSession();
   const loading = status === "loading";
+
+  const router = useRouter();
+
+  if (session) {
+    router.asPath = "/mypage";
+    router.push("/mypage", router.asPath);
+  }
 
   return (
     <div>
