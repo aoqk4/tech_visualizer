@@ -30,7 +30,13 @@ export default function MyPage() {
           <button className="text-2xl" onClick={() => setStat(1)}>
             회원 정보
           </button>
-          <button className="text-2xl" onClick={() => setStat(2)}>
+          <button
+            className="text-2xl"
+            onClick={() => {
+              alert("준비중입니다.");
+              setStat(1);
+            }}
+          >
             이용 내역
           </button>
           <button className="text-2xl" onClick={() => setStat(3)}>
