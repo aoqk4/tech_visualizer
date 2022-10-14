@@ -15,6 +15,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import MCharts from "../../components/MChart";
+import { signOut, useSession } from "next-auth/react";
 
 type needDataType = {
   tchlgyIndcprDtl: String;
@@ -91,6 +92,9 @@ export default function DashBoard() {
       },
     ],
   });
+
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
 
   const router = useRouter();
 
