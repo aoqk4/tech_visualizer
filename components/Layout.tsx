@@ -21,7 +21,7 @@ export default function Layout(props: LayoutProps) {
       </div>
       <div className="flex ">
         <div className="pr-10 text-4xl font-mono">
-          <Link href={`/login`}>Documentation</Link>
+          <Link href={`/docs`}>Documentation</Link>
         </div>
         <div className="pr-12 text-4xl font-mono">
           <Link href={status === "authenticated" ? "/mypage" : "/login"}>

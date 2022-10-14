@@ -10,13 +10,11 @@ export default function MyPage() {
 
   const { data: session, status } = useSession();
   const loading = status === "loading";
-  // console.log(Date());
 
   const router = useRouter();
 
   useEffect(() => {
     if (!session) {
-      console.log(session);
       router.push("/");
     }
   }, []);
@@ -33,7 +31,7 @@ export default function MyPage() {
           <button
             className="text-2xl"
             onClick={() => {
-              alert("준비중입니다.");
+              alert("서비스 준비중입니다.");
               setStat(1);
             }}
           >
