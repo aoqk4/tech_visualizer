@@ -7,8 +7,6 @@ const Login: NextPage = (props) => {
   const { data: session, status } = useSession();
   const loading = status === "loading";
 
-  console.log(status);
-
   return (
     <div>
       <Layout></Layout>

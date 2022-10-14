@@ -24,8 +24,6 @@ const Home: NextPage = () => {
 
   const { data: session, status } = useSession();
 
-  console.log(status);
-
   Chart.defaults.color = "#ffffff";
 
   const data: ChartData<"line", number[], string> = {

@@ -10,8 +10,6 @@ export default function MyPage() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
 
-  console.log();
-
   return (
     <div>
       <Layout></Layout>
