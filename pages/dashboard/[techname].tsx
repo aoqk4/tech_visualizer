@@ -283,11 +283,6 @@ export default function DashBoard() {
   }
 
   useEffect(() => {
-    fetch("../api/makelog", {
-      method: "POST",
-      body: session?.user?.email,
-    });
-
     dataTest();
     dataTest2();
     dataTest3();
