@@ -31,6 +31,7 @@ export default async function handler(
     }
   } catch (err) {
   } finally {
+    res.status(200).json({ name: "name" });
     prisma.$disconnect();
   }
 }
