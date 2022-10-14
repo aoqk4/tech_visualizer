@@ -17,18 +17,12 @@ export default async function handler(
 ) {
   try {
     const wantemail = req.body;
-    const already = await prisma.counter.findFirst({
-      where: {
+
+    await prisma.counter.create({
+      data: {
         email: wantemail,
       },
     });
-    if (!already) {
-      await prisma.counter.create({
-        data: {
-          email: wantemail,
-        },
-      });
-    }
   } catch (err) {
   } finally {
     res.status(200).json({ name: "name" });
