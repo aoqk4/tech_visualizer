@@ -17,12 +17,6 @@ export default async function handler(
 ) {
   try {
     const wantemail = req.body;
-
-    await prisma.counter.create({
-      data: {
-        email: wantemail,
-      },
-    });
   } catch (err) {
   } finally {
     res.status(200).json({ name: "name" });
